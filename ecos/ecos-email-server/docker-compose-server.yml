@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  ecos_email_image:
+    build:
+      context: .
+      target: production
+    container_name: ecos_email_container
+    image: johedotcom/ecos-email-repository:latest
+    restart: always
+    environment:
+      - FLASK_DEBUG=False
+      - SENDER_EMAIL=capoolingecos@gmail.com
+      - SENDER_PASSWORD=gsro ekpk enhh wjvb
+    ports:
+      - "4060:5000"
+    networks:
+      - ecos_network
+
+networks:
+  ecos_network:
+    external: true

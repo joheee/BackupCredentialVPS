@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+  googolplex_backend_image:
+    build:
+      context: .
+      target: production
+    container_name: googolplex_backend
+    image: johedotcom/googolplex-backend-repository:latest
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://root:Ph@mNgocH4n@postgres_database_server_container:5432/db_googolplex
+      - IMAGE_SERVER_ENDPOINT=http://localhost:4050
+    ports:
+      - '0.0.0.0:6040:3000'
+    volumes:
+      - .:/usr/src/app
+    command: ['node', 'dist/main.js']
+    networks:
+      - googolplex_network
+      - pg_network
+
+networks:
+  googolplex_network:
+    external: true
+  pg_network:
+    external: true

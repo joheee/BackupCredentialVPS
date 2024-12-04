@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  postgres_database_server:
+    container_name: postgres_database_server_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: Ph@mNgocH4n
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pg_network
+
+  pgadmin_frontend:
+    container_name: pgadmin_frontend_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@netman.com
+      PGADMIN_DEFAULT_PASSWORD: Ph@mNgocH4n
+    ports:
+      - "5050:80"
+    networks:
+      - pg_network
+
+networks:
+  pg_network:
+    external: true
+
+volumes:
+  postgres_data:
+
